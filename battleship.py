@@ -1,6 +1,7 @@
 import copy
 import time
 import os
+import random
 
 
 def init_boards():
@@ -57,3 +58,13 @@ def place_ship(board, user_input):
     row_index = alphabet_reference.find(user_input[0].upper())
     col_index = int(user_input[1]) - 1
     board[row_index][col_index] = 'X'
+
+
+def print_hit_message():
+    msg1 = "Hit confirmed!"
+    msg2 = "Citadel hit!"
+    msg3 = "Boiler hit!"
+    msg4 = "Smokestack hit!"
+    msg5 = "Ammo rack hit!"
+    hit_messages = {1: msg1, 2: msg2, 3: msg3, 4: msg4, 5: msg5}
+    print(hit_messages[random.randrange(1, 5)])
