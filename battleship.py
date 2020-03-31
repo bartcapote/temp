@@ -26,3 +26,19 @@ def wrong_input_message(board):
     time.sleep(0.8)
     os.system('clear')
     # print_board(board)  -  COMMENT OUT UNTIL print_board() IS DEFINED
+
+
+def check_input(board, user_input):
+    alphabet_reference = 'ABCDEFGHIKLMNOPQRSTUVWXYZ'
+    if len(user_input) == 2 and user_input[0].isalpha() and user_input[1].isnumeric():
+        row_index = alphabet_reference.find(user_input[0].upper())
+        col_index = int(user_input[1]) - 1
+        board_height = len(board)
+        if row_index < board_height and col_index < board_height:
+            return True
+        else:
+            wrong_input_message(board)
+            return False
+    else:
+        wrong_input_message(board)
+        return False
