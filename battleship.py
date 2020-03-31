@@ -42,3 +42,11 @@ def check_input(board, user_input):
     else:
         wrong_input_message(board)
         return False
+
+
+def check_ships_left(board, max_ships):
+    ship_counter = 0
+    for row in board:
+        for cell in row:
+            ship_counter += 1 if cell == 'X' else 0
+    return True if ship_counter < max_ships else False
