@@ -50,3 +50,10 @@ def check_ships_left(board, max_ships):
         for cell in row:
             ship_counter += 1 if cell == 'X' else 0
     return True if ship_counter < max_ships else False
+
+
+def place_ship(board, user_input):
+    alphabet_reference = 'ABCDEFGHIKLMNOPQRSTUVWXYZ'
+    row_index = alphabet_reference.find(user_input[0].upper())
+    col_index = int(user_input[1]) - 1
+    board[row_index][col_index] = 'X'
