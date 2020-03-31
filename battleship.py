@@ -84,3 +84,7 @@ def battleship_game():
         # place_ship(board1, user_input)    |
         # print_board(board1)               | COMMENT OUT UNTIL REFERENCES DEFINED
         pass
+
+
+if __name__ == "__main__":
+    battleship_game()
