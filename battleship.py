@@ -72,3 +72,15 @@ def print_hit_message():
 
 def print_sunk_message():
     print('Ship sunk!')
+
+
+def battleship_game():
+    max_ships = 8
+    board1 = init_boards()[0]
+    while check_ships_left(board1, max_ships):
+        # board2 = init_boards()[1]         |
+        # print_board(board1)               |
+        # user_input = get_input(board1)    |
+        # place_ship(board1, user_input)    |
+        # print_board(board1)               | COMMENT OUT UNTIL REFERENCES DEFINED
+        pass
