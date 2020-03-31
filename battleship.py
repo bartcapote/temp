@@ -68,3 +68,7 @@ def print_hit_message():
     msg5 = "Ammo rack hit!"
     hit_messages = {1: msg1, 2: msg2, 3: msg3, 4: msg4, 5: msg5}
     print(hit_messages[random.randrange(1, 5)])
+
+
+def print_sunk_message():
+    print('Ship sunk!')
