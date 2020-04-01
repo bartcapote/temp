@@ -20,9 +20,9 @@ def print_board(board):
     col_headers = "12345"
     for row in range(6):
         if row == 0:
-            print("  " + "".join(col_headers))
+            print("   " + " ".join(col_headers))
         else:
-            print(row_headers[row - 1] + " " + "".join(board[row - 1]))
+            print(row_headers[row - 1] + "  " + " ".join(board[row - 1]))
 
 
 def toggle_player(player):
@@ -69,10 +69,10 @@ def check_if_coordinates_in_board(board, row_index, col_index):
         return False
 
 
-def check_placement(board, input):	
+def check_placement(board, input):
     # ships are to close
     # if correct mark input
-	return True	
+    return True
 
 
 def check_ships_left(board, max_ships):
@@ -83,16 +83,14 @@ def check_ships_left(board, max_ships):
     return True if ship_counter < max_ships else False
 
 
-def place_ship(board, user_input):
-    alphabet_reference = 'ABCDEFGHIKLMNOPQRSTUVWXYZ'
-    row_index = alphabet_reference.find(user_input[0].upper())
-    col_index = int(user_input[1]) - 1
+def place_ship(board, row_index, col_index):
     board[row_index][col_index] = 'X'
+    return board
 
 
-def print_player_move_message(player):	
+def print_player_move_message(player):
 
-	print()	
+    print()
 
 
 def print_hit_message():
@@ -105,29 +103,29 @@ def print_hit_message():
     print(hit_messages[random.randrange(1, 5)])
 
 
-def print_miss_message():	
-    if row_index != 0 and col_index != 0:
-        print("You've missed!")	
+# def print_miss_message():
+#     if row_index != 0 and col_index != 0:
+#         print("You've missed!")
 
 
-def print_sunk_message():
-    if row_index == "X" and col_index == "X":
-        print('Ship sunk!')
+# def print_sunk_message():
+#     if row_index == "X" and col_index == "X":
+#         print('Ship sunk!')
 
 
-# def display_waiting_screen():	
-#     sleep(2) 
+# def display_waiting_screen():
+#     sleep(2)
 #     root.destroy()
-# 
+#
 #     root = tk.Tk()
 #     root.title("Battleship")
-# 
+#
 #     label = tk.Label(root, text="Wait for input.")
 #     label.pack()
-# 
+#
 #     root.after(200, task)
 #     root.mainloop()
-# 
+#
 #     print("You can start a game now.")
 
 
@@ -135,12 +133,18 @@ def battleship_game():
     max_ships = 8
     board1 = init_boards()[0]
     while check_ships_left(board1, max_ships):
-        board2 = init_boards()[1]
         print_board(board1)
-        user_input = get_input(board1)
-        place_ship(board1, user_input)       
-        print_board(board1)
-        pass
+        user_input = get_input()
+        if check_input_format(board1, user_input):
+            move_coordinates = convert_to_coordinates(user_input)
+            row_index = move_coordinates[0]
+            col_index = move_coordinates[1]
+            if check_if_coordinates_in_board(board1, row_index, col_index):
+                board = place_ship(board1, row_index, col_index)
+    print_board(board1)
+
+
+
 
 
 if __name__ == "__main__":
