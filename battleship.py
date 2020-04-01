@@ -140,11 +140,8 @@ def battleship_game():
             row_index = move_coordinates[0]
             col_index = move_coordinates[1]
             if check_if_coordinates_in_board(board1, row_index, col_index):
-                board = place_ship(board1, row_index, col_index)
+                board1 = place_ship(board1, row_index, col_index)
     print_board(board1)
-
-
-
 
 
 if __name__ == "__main__":
