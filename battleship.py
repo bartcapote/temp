@@ -16,6 +16,7 @@ def init_boards():
 
 
 def print_board(board):
+    os.system('clear')
     row_headers = "ABCDE"
     col_headers = "12345"
     for row in range(6):
@@ -67,12 +68,6 @@ def check_if_coordinates_in_board(board, row_index, col_index):
     else:
         wrong_input_message(board)
         return False
-
-
-def check_placement(board, input):
-    # ships are to close
-    # if correct mark input
-    return True
 
 
 def check_ships_left(board, max_ships):
