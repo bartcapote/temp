@@ -113,7 +113,7 @@ def print_miss_message():
 
 def print_sunk_message():
     if row_index == "X" and col_index == "X":
-    print('Ship sunk!')
+        print('Ship sunk!')
 
 
 def display_waiting_screen():	
