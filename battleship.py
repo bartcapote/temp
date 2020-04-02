@@ -96,6 +96,14 @@ def check_input_format_small_ship(board, user_input):
         return False
 
 
+def check_input_format_for_fire(board, user_input, player):
+    if len(user_input) == 2 and user_input[0].isalpha() and user_input[1].isnumeric():
+        return True
+    else:
+        wrong_input_message_for_fire(board, player)
+        return False
+
+
 def coordinates_in_board_for_big_ship(board, row_index, col_index, direction):
     board_height = len(board)
     if direction == '|':
@@ -118,14 +126,6 @@ def coordinates_in_board_for_small_ship(board, row_index, col_index):
         return True
     else:
         wrong_input_message(board)
-        return False
-
-
-def check_input_format_for_fire(board, user_input, player):
-    if len(user_input) == 2 and user_input[0].isalpha() and user_input[1].isnumeric():
-        return True
-    else:
-        wrong_input_message_for_fire(board, player)
         return False
 
 
