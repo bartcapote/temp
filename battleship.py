@@ -14,6 +14,10 @@ def init_boards():
     return board1, board2
 
 
+def hide_ship_names(board):
+    pass
+
+
 def print_board(board):
     os.system('clear')
     row_headers = "ABCDE"
