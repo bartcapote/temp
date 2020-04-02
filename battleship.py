@@ -213,6 +213,7 @@ def is_missed(board, row_index, col_index):
 def print_missed_message(board, row_index, col_index):
     if board[row_index][col_index] == "M":
         print("You've missed!")
+        time.sleep(.5)
 
 
 def is_hit(board, row_index, col_index):
