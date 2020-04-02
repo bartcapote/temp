@@ -198,7 +198,7 @@ def is_miss(board, row_index, col_index):
          # return True
 
 
-def ship_hit(board, row_index, col_index):
+def is_hit(board, row_index, col_index):
     pass # wstawia 'H', wywołuje print_hit()
     # return True
 
