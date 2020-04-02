@@ -225,7 +225,7 @@ def is_hit(board, row_index, col_index):
 
 
 def print_hit_message(board, row_index, col_index):
-    if board[row_index][col_index] == "H":
+    if board[row_index][col_index] == "\033[31m\033[1mH\033[0m":
         print("You've hit the ship!")
 
 
