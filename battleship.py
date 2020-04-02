@@ -129,6 +129,19 @@ def coordinates_in_board_for_small_ship(board, row_index, col_index):
         return False
 
 
+def coordinates_in_board_for_fire(board, row_index, col_index, player):
+    board_height = len(board)
+    if row_index < board_height and col_index < board_height:
+        return True
+    else:
+        print('\033[1m\033[31mWrong input! Try again.\033[0m')
+        time.sleep(0.5)
+        os.system('clear')
+        print_board_with_hidden_ships(board)
+        print(f'\nPlayer {toggle_player(player)}: Fire!\n')
+        return False
+
+
 def move_not_touching_ships(board, row_index, col_index):
     index_range = len(board) - 1
     zero_case = False
