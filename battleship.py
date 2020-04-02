@@ -218,8 +218,10 @@ def print_missed_message(board, row_index, col_index):
 
 def is_hit(board, row_index, col_index):
     if board[row_index][col_index].isnumeric():
-        board[row_index][col_index] == "H"
+        board[row_index][col_index] = "\033[31m\033[1mH\033[0m"
         return True
+    else:
+        return False
 
 
 def print_hit_message(board, row_index, col_index):
