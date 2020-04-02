@@ -15,11 +15,16 @@ def init_boards():
 
 
 def hide_ship_names(board):
-    pass
+    board = copy.deepcopy(board)
+    for row in board:
+        for index in range(len(row)):
+            if row[index].isnumeric():
+                row[index] = 'X'
+    return board
 
 
 def print_board(board):
-    # board = hide_ship_names(board)
+    board = hide_ship_names(board)
     os.system('clear')
     row_headers = "ABCDE"
     col_headers = "12345"
