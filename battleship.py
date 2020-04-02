@@ -19,6 +19,7 @@ def hide_ship_names(board):
 
 
 def print_board(board):
+    # board = hide_ship_names(board)
     os.system('clear')
     row_headers = "ABCDE"
     col_headers = "12345"
