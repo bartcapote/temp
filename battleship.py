@@ -61,6 +61,13 @@ def wrong_input_message(board):
     print_board(board)
 
 
+def wrong_input_message_for_fire(board, player):
+    print('\033[1m\033[31mWrong input! Try again.\033[0m')
+    time.sleep(0.5)
+    print_board_with_hidden_ships(board)
+    print(f'Player {toggle_player(player)}: Fire!\n')
+
+
 def convert_to_coordinates(user_input):
     alphabet_reference = 'ABCDEFGHIKLMNOPQRSTUVWXYZ'
     row_index = alphabet_reference.find(user_input[0].upper())
