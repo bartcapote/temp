@@ -173,12 +173,6 @@ def move_not_touching_ships(board, row_index, col_index):
     return True
 
 
-def check_placement(board, row_index, col_index):
-    for row in board:
-        for cell in row:
-            pass
-
-
 def more_ships_to_place(board, max_ships):
     ship_counter = 0
     for row in board:
@@ -201,11 +195,6 @@ def place_big_ship(board, row_index, col_index, direction, ship_name):
     if direction == '|':
         board[row_index][col_index] = ship_name
         board[row_index + 1][col_index] = ship_name
-
-
-def print_player_move_message(player):
-
-    print()
 
 
 def print_hit_message():
