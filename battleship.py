@@ -229,9 +229,8 @@ def print_hit_message(board, row_index, col_index):
         print("You've hit the ship!")
 
 
-# def print_sunk_message():
-#     if row_index == "X" and col_index == "X":
-#         print('Ship sunk!')
+def print_sunk_message():
+    print('\033[1m\033[95mThey\'re sinking!\033[0m')
 
 
 def is_sunk(board, row_index, col_index):
