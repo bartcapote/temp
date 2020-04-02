@@ -198,12 +198,12 @@ def print_missed_message(board, row_index, col_index):
 
 def is_hit(board, row_index, col_index):
     if board[row_index][col_index].isnumeric():
-        board[row_index][col_index] = "H"
+        board[row_index][col_index] == "H"
         return True
 
 
-def print_hit_message(row_index, col_index):
-    if board[row_index][col_index] = "H":
+def print_hit_message(board, row_index, col_index):
+    if board[row_index][col_index] == "H":
         print("You've hit the ship!")
 
 
@@ -212,10 +212,9 @@ def print_hit_message(row_index, col_index):
 #         print('Ship sunk!')
 
 
-
 def is_sunk(board, row_index, col_index):
-    pass # sprawdza zawartość komórki, wyszukuje czy ta wartość jest jeszcze gdziekolwiek w tablicy
-         # jeśli nie, to return True, wywołuje print_sunk()
+    pass  # sprawdza zawartość komórki, wyszukuje czy ta wartość jest jeszcze gdziekolwiek w tablicy
+          # jeśli nie, to return True, wywołuje print_sunk()
 
 
 def no_ships_left(board):
@@ -300,7 +299,7 @@ def battleship_game():
             move_coordinates = convert_to_coordinates(user_input)
             row_index = move_coordinates[0]
             col_index = move_coordinates[1]
-            is_miss(board, row_index, col_index)
+            is_missed(board, row_index, col_index)
             is_hit(board, row_index, col_index)
             is_sunk(board, row_index, col_index)
         toggle_player(player)
