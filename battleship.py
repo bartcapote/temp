@@ -144,7 +144,7 @@ def check_placement(board, row_index, col_index):
             pass
 
 
-def check_ships_left(board, max_ships):
+def more_ships_to_place(board, max_ships):
     ship_counter = 0
     for row in board:
         for cell in row:
@@ -213,52 +213,78 @@ def no_ships_left(board):
            # jeśli tak, to return True
 
 
+def enemy_has_ships(player, board1, board2):
+    player = toggle_player(player)
+    if player == 1:
+        board = board1
+    else:
+        board = board2
+    for row in board:
+        for cell in row:
+            if cell.isnumeric():
+                return True
+            else:
+                return False
+
+
 def battleship_game():
     board1 = init_boards()[0]
+    board2 = init_boards()[1]
     ship_name = 0
-    # BIG SHIP:
-    max_ships = 4
-    while check_ships_left(board1, max_ships):
-        print_board(board1)
-        user_input = get_input()
-        if check_input_format_big_ship(board1, user_input):
-            move_coordinates = convert_to_coordinates(user_input)
-            row_index = move_coordinates[0]
-            col_index = move_coordinates[1]
-            direction = user_input[2]
-            if (coordinates_in_board_for_big_ship(board1, row_index, col_index, direction)
-               and move_not_touching_ships(board1, row_index, col_index)):
-                if direction == '-':
-                    if move_not_touching_ships(board1, row_index, col_index + 1):
-                        ship_name += 1
-                        place_big_ship(board1, row_index, col_index, direction, ship_name)
-                    else:
-                        wrong_input_message(board1)
-                elif direction == '|':
-                    if move_not_touching_ships(board1, row_index + 1, col_index):
-                        ship_name += 1
-                        place_big_ship(board1, row_index, col_index, direction, ship_name)
-                    else:
-                        wrong_input_message(board1)
-            else:
-                wrong_input_message(board1)
-            print_board(board1)
-    # SMALL SHIP:
-    max_ships = 7
-    while check_ships_left(board1, max_ships):
-        user_input = get_input()
-        if check_input_format_small_ship(board1, user_input):
-            move_coordinates = convert_to_coordinates(user_input)
-            row_index = move_coordinates[0]
-            col_index = move_coordinates[1]
-            if (coordinates_in_board_for_small_ship(board1, row_index, col_index)
-               and move_not_touching_ships(board1, row_index, col_index)):
-                ship_name += 1
-                place_small_ship(board1, row_index, col_index, ship_name)
-                print_board(board1)
-            else:
-                wrong_input_message(board1)
-    print_board(board1)
+    player = 1
+    # PLACEMENT PHASE:
+    for i in range(2):
+        if player == 1:
+            board = board1
+        else:
+            board = board2
+        # BIG SHIP:
+        max_ships = 4
+        while more_ships_to_place(board, max_ships):
+            print_board(board)
+            user_input = get_input()
+            if check_input_format_big_ship(board, user_input):
+                move_coordinates = convert_to_coordinates(user_input)
+                row_index = move_coordinates[0]
+                col_index = move_coordinates[1]
+                direction = user_input[2]
+                if (coordinates_in_board_for_big_ship(board, row_index, col_index, direction)
+                   and move_not_touching_ships(board, row_index, col_index)):
+                    if direction == '-':
+                        if move_not_touching_ships(board, row_index, col_index + 1):
+                            ship_name += 1
+                            place_big_ship(board, row_index, col_index, direction, ship_name)
+                        else:
+                            wrong_input_message(board)
+                    elif direction == '|':
+                        if move_not_touching_ships(board, row_index + 1, col_index):
+                            ship_name += 1
+                            place_big_ship(board, row_index, col_index, direction, ship_name)
+                        else:
+                            wrong_input_message(board)
+                else:
+                    wrong_input_message(board)
+                print_board(board)
+        # SMALL SHIP:
+        max_ships = 7
+        while more_ships_to_place(board, max_ships):
+            user_input = get_input()
+            if check_input_format_small_ship(board, user_input):
+                move_coordinates = convert_to_coordinates(user_input)
+                row_index = move_coordinates[0]
+                col_index = move_coordinates[1]
+                if (coordinates_in_board_for_small_ship(board, row_index, col_index)
+                   and move_not_touching_ships(board, row_index, col_index)):
+                    ship_name += 1
+                    place_small_ship(board, row_index, col_index, ship_name)
+                    print_board(board)
+                else:
+                    wrong_input_message(board)
+        print_board(board)
+        toggle_player(player)
+    #  FIRING PHASE:
+    while enemy_has_ships(player, board1, board2):
+        pass
 
 
 if __name__ == "__main__":
