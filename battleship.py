@@ -21,6 +21,15 @@ def hide_ship_names(board):
     return board
 
 
+def print_board_with_hidden_ships(board):
+    board_to_show = copy.deepcopy(board)
+    for row in board_to_show:
+        for index in range(len(row)):
+            if row[index].isnumeric():
+                row[index] = '\033[36m~\033[0m'
+    print_board(board_to_show)
+
+
 def print_board(board):
     board = hide_ship_names(board)
     os.system('clear')
