@@ -17,7 +17,7 @@ def hide_ship_names(board):
     for row in board:
         for index in range(len(row)):
             if row[index].isnumeric():
-                row[index] = 'X'
+                row[index] = '\033[1mX\033[0m'
     return board
 
 
