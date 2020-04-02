@@ -259,11 +259,6 @@ def enemy_has_ships(player, board1, board2):
     return False
 
 
-def no_ships_left(board):
-    pass   # sprawdza czy w boardzie gracza jest jakakolwiek komórka zawierająca wartość numeryczną
-           # jeśli tak, to return True
-
-
 def enemy_has_ships(player, board1, board2):
     player = toggle_player(player)
     if player == 1:
