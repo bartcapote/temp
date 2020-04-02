@@ -193,6 +193,26 @@ def print_hit_message():
 #         print('Ship sunk!')
 
 
+def is_miss(board, row_index, col_index):
+    pass # jeśli w komórce jest wartość NIE numeryczna
+         # return True
+
+
+def ship_hit(board, row_index, col_index):
+    pass # wstawia 'H', wywołuje print_hit()
+    # return True
+
+
+def is_sunk(board, row_index, col_index):
+    pass # sprawdza zawartość komórki, wyszukuje czy ta wartość jest jeszcze gdziekolwiek w tablicy
+         # jeśli nie, to return True
+
+
+def no_ships_left(board):
+    pass   # sprawdza czy w boardzie gracza jest jakakolwiek komórka zawierająca wartość numeryczną
+           # jeśli tak, to return True
+
+
 def battleship_game():
     board1 = init_boards()[0]
     ship_name = 0
