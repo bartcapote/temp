@@ -11,6 +11,16 @@ def init_boards(height):
     return board1, board2
 
 
+# def init_boards(height):                       #  FIXED BOARD FOR TESTING PURPOSE
+#     board1 = [['1', '1', '~', '2', '2'],
+#               ['~', '~', '~', '~', '~'],
+#               ['~', '~', '~', '~', '~'],
+#               ['~', '~', '~', '~', '~'],
+#               ['3', '~', '4', '~', '5']]
+#     board2 = copy.deepcopy(board1)
+#     return board1, board2
+
+
 def hide_ship_names(board):
     board = copy.deepcopy(board)
     for row in board:
@@ -339,6 +349,7 @@ def battleship_game():
                 col_index = move_coordinates[1]
                 if coordinates_in_board_for_fire(board, row_index, col_index, player):
                     correct_firing_solution = True
+                    hit_ship_name = board[row_index][col_index]
                     if is_missed(board, row_index, col_index):
                         print_board_with_hidden_ships(board)
                         print(f'Player {toggle_player(player)}: Fire!\n')
@@ -349,8 +360,7 @@ def battleship_game():
                         print(f'Player {toggle_player(player)}: Fire!\n')
                         print_hit_message(board, row_index, col_index)
                         time.sleep(.5)
-                        hit_ship_name = board[row_index][col_index]
-                        is_sunk(board, hit_ship_name)
+                    is_sunk(board, hit_ship_name)
                     print_board_with_hidden_ships(board)
                     time.sleep(.8)
     print(f'Player {toggle_player(player)}, you\'ve sunk all the enemy ships! Good job, Admiral!')
