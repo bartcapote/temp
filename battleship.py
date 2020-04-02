@@ -197,18 +197,13 @@ def place_big_ship(board, row_index, col_index, direction, ship_name):
         board[row_index + 1][col_index] = ship_name
 
 
-def print_hit_message():
-    msg1 = "Hit confirmed!"
-    msg2 = "Citadel hit!"
-    msg3 = "Boiler hit!"
-    msg4 = "Smokestack hit!"
-    msg5 = "Ammo rack hit!"
-    hit_messages = {1: msg1, 2: msg2, 3: msg3, 4: msg4, 5: msg5}
-    print(hit_messages[random.randrange(1, 5)])
-
-
 def is_missed(board, row_index, col_index):
     if board[row_index][col_index].isnumeric():
+        return False
+    elif board[row_index][col_index] == '\033[31m\033[1mH\033[0m':
+        print_board_with_hidden_ships(board)
+        print('\033[1m\033[91mYou can\'t make more holes in there!\033[0m')
+        time.sleep(.8)
         return False
     else:
         board[row_index][col_index] = "M"
