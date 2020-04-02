@@ -246,6 +246,19 @@ def is_sunk(board, hit_ship_name):
     return True
 
 
+def enemy_has_ships(player, board1, board2):
+    player = toggle_player(player)
+    if player == 1:
+        board = board2
+    else:
+        board = board1
+    for row in board:
+        for cell_index in range(len(row)):
+            if row[cell_index].isnumeric():
+                return True
+    return False
+
+
 def no_ships_left(board):
     pass   # sprawdza czy w boardzie gracza jest jakakolwiek komórka zawierająca wartość numeryczną
            # jeśli tak, to return True
