@@ -205,7 +205,7 @@ def is_hit(board, row_index, col_index):
 
 def is_sunk(board, row_index, col_index):
     pass # sprawdza zawartość komórki, wyszukuje czy ta wartość jest jeszcze gdziekolwiek w tablicy
-         # jeśli nie, to return True
+         # jeśli nie, to return True, wywołuje print_sunk()
 
 
 def no_ships_left(board):
@@ -284,7 +284,18 @@ def battleship_game():
         toggle_player(player)
     #  FIRING PHASE:
     while enemy_has_ships(player, board1, board2):
-        pass
+        print_board(board2)
+        user_input = get_input()
+        if check_input_format_big_ship:
+            move_coordinates = convert_to_coordinates(user_input)
+            row_index = move_coordinates[0]
+            col_index = move_coordinates[1]
+            is_miss(board, row_index, col_index)
+            is_hit(board, row_index, col_index)
+            is_sunk(board, row_index, col_index)
+        toggle_player(player)
+    toggle_player(player)
+    print(f'Player {player}, you sunk all the enemy ships! Good job, Admiral!')
 
 
 if __name__ == "__main__":
