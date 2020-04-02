@@ -183,24 +183,34 @@ def print_hit_message():
     print(hit_messages[random.randrange(1, 5)])
 
 
-# def print_miss_message():
-#     if row_index != 0 and col_index != 0:
-#         print("You've missed!")
+def is_missed(board, row_index, col_index):
+    if board[row_index][col_index].isnumeric():
+        return False
+    else:
+        board[row_index][col_index] = "M"
+        return True
+
+
+def print_missed_message(board, row_index, col_index):
+    if board[row_index][col_index] == "M":
+        print("You've missed!")
+
+
+def is_hit(board, row_index, col_index):
+    if board[row_index][col_index].isnumeric():
+        board[row_index][col_index] = "H"
+        return True
+
+
+def print_hit_message(row_index, col_index):
+    if board[row_index][col_index] = "H":
+        print("You've hit the ship!")
 
 
 # def print_sunk_message():
 #     if row_index == "X" and col_index == "X":
 #         print('Ship sunk!')
 
-
-def is_miss(board, row_index, col_index):
-    pass # jeśli w komórce jest wartość NIE numeryczna
-         # return True
-
-
-def is_hit(board, row_index, col_index):
-    pass # wstawia 'H', wywołuje print_hit()
-    # return True
 
 
 def is_sunk(board, row_index, col_index):
