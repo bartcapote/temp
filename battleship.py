@@ -51,7 +51,7 @@ def toggle_player(player):
 
 
 def get_input():
-    user_input = input("Input: ")
+    user_input = input("Choose coordinates: ")
     return user_input
 
 
