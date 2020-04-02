@@ -1,7 +1,6 @@
 import copy
 import time
 import os
-import random
 
 
 def init_boards(height):
@@ -212,8 +211,8 @@ def is_missed(board, row_index, col_index):
 
 def print_missed_message(board, row_index, col_index):
     if board[row_index][col_index] == "M":
-        print("You've missed!")
-        time.sleep(.5)
+        print("\033[1m\033[31mYou've missed!\033[0m")
+        time.sleep(.8)
 
 
 def is_hit(board, row_index, col_index):
@@ -226,7 +225,8 @@ def is_hit(board, row_index, col_index):
 
 def print_hit_message(board, row_index, col_index):
     if board[row_index][col_index] == "\033[31m\033[1mH\033[0m":
-        print("You've hit the ship!")
+        print("\033[1m\033[32mYou've hit the ship!\033[0m")
+        time.sleep(.8)
 
 
 def print_sunk_message():
@@ -257,20 +257,6 @@ def enemy_has_ships(player, board1, board2):
             if row[cell_index].isnumeric():
                 return True
     return False
-
-
-def enemy_has_ships(player, board1, board2):
-    player = toggle_player(player)
-    if player == 1:
-        board = board1
-    else:
-        board = board2
-    for row in board:
-        for cell in row:
-            if cell.isnumeric():
-                return True
-            else:
-                return False
 
 
 def battleship_game():
