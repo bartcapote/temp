@@ -339,7 +339,6 @@ def battleship_game():
                 col_index = move_coordinates[1]
                 if coordinates_in_board_for_fire(board, row_index, col_index, player):
                     correct_firing_solution = True
-                    hit_ship_name = board[row_index][col_index]
                     if is_missed(board, row_index, col_index):
                         print_board_with_hidden_ships(board)
                         print(f'Player {toggle_player(player)}: Fire!\n')
@@ -350,7 +349,8 @@ def battleship_game():
                         print(f'Player {toggle_player(player)}: Fire!\n')
                         print_hit_message(board, row_index, col_index)
                         time.sleep(.5)
-                    is_sunk(board, hit_ship_name)
+                        hit_ship_name = board[row_index][col_index]
+                        is_sunk(board, hit_ship_name)
                     print_board_with_hidden_ships(board)
                     time.sleep(.8)
     print(f'Player {toggle_player(player)}, you\'ve sunk all the enemy ships! Good job, Admiral!')
