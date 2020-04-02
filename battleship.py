@@ -233,9 +233,17 @@ def print_sunk_message():
     print('\033[1m\033[95mThey\'re sinking!\033[0m')
 
 
-def is_sunk(board, row_index, col_index):
-    pass  # sprawdza zawartość komórki, wyszukuje czy ta wartość jest jeszcze gdziekolwiek w tablicy
-          # jeśli nie, to return True, wywołuje print_sunk()
+def is_sunk(board, hit_ship_name):
+    for row in board:
+        if hit_ship_name in row:
+            return False
+    for row in board:
+        for cell_index in range(len(row)):
+            if row[cell_index] == '\033[31m\033[1mH\033[0m':
+                row[cell_index] = '\033[35mS\033[0m'
+    print_sunk_message()
+    time.sleep(.8)
+    return True
 
 
 def no_ships_left(board):
