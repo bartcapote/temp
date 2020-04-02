@@ -279,8 +279,9 @@ def enemy_has_ships(player, board1, board2):
 
 
 def battleship_game():
-    board1 = init_boards()[0]
-    board2 = init_boards()[1]
+    board_height = 5
+    board1 = init_boards(board_height)[0]
+    board2 = init_boards(board_height)[1]
     ship_name = 0
     player = 1
     # PLACEMENT PHASE:
@@ -332,21 +333,46 @@ def battleship_game():
                 else:
                     wrong_input_message(board)
         print_board(board)
-        toggle_player(player)
-    #  FIRING PHASE:
+        time.sleep(0.5)
+        os.system('clear')
+        if player == 1:
+            input('Press enter to start positioning phase...')
+        else:
+            input('Press enter to start firing!')
+        player = toggle_player(player)
+    # FIRING PHASE:
     while enemy_has_ships(player, board1, board2):
-        print_board(board2)
-        user_input = get_input()
-        if check_input_format_big_ship:
-            move_coordinates = convert_to_coordinates(user_input)
-            row_index = move_coordinates[0]
-            col_index = move_coordinates[1]
-            is_missed(board, row_index, col_index)
-            is_hit(board, row_index, col_index)
-            is_sunk(board, row_index, col_index)
-        toggle_player(player)
-    toggle_player(player)
-    print(f'Player {player}, you sunk all the enemy ships! Good job, Admiral!')
+        if player == 1:
+            board = board2
+        else:
+            board = board1
+        player = toggle_player(player)
+        print_board_with_hidden_ships(board)
+        print(f'Player {toggle_player(player)}: Fire!\n')
+        correct_firing_solution = False
+        while correct_firing_solution is False:
+            user_input = get_input()
+            if check_input_format_for_fire(board, user_input, player):
+                move_coordinates = convert_to_coordinates(user_input)
+                row_index = move_coordinates[0]
+                col_index = move_coordinates[1]
+                if coordinates_in_board_for_fire(board, row_index, col_index, player):
+                    correct_firing_solution = True
+                    hit_ship_name = board[row_index][col_index]
+                    if is_missed(board, row_index, col_index):
+                        print_board_with_hidden_ships(board)
+                        print(f'Player {toggle_player(player)}: Fire!\n')
+                        print_missed_message(board, row_index, col_index)
+                        time.sleep(.5)
+                    if is_hit(board, row_index, col_index):
+                        print_board_with_hidden_ships(board)
+                        print(f'Player {toggle_player(player)}: Fire!\n')
+                        print_hit_message(board, row_index, col_index)
+                        time.sleep(.5)
+                    is_sunk(board, hit_ship_name)
+                    print_board_with_hidden_ships(board)
+                    time.sleep(.8)
+    print(f'Player {toggle_player(player)}, you\'ve sunk all the enemy ships! Good job, Admiral!')
 
 
 if __name__ == "__main__":
