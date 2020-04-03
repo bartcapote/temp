@@ -3,22 +3,22 @@ import time
 import os
 
 
-def init_boards(height):
-    board1 = []
-    for i in range(height):
-        board1.append(['\033[36m~\033[0m'] * height)
-    board2 = copy.deepcopy(board1)
-    return board1, board2
-
-
-# def init_boards(height):                       #  FIXED BOARD FOR TESTING PURPOSE
-#     board1 = [['1', '1', '~', '2', '2'],
-#               ['~', '~', '~', '~', '~'],
-#               ['~', '~', '~', '~', '~'],
-#               ['~', '~', '~', '~', '~'],
-#               ['3', '~', '4', '~', '5']]
+# def init_boards(height):
+#     board1 = []
+#     for i in range(height):
+#         board1.append(['\033[36m~\033[0m'] * height)
 #     board2 = copy.deepcopy(board1)
 #     return board1, board2
+
+
+def init_boards(height):                       #  FIXED BOARD FOR TESTING PURPOSE
+    board1 = [['1', '1', '~', '2', '2'],
+              ['~', '~', '~', '~', '~'],
+              ['~', '~', '~', '~', '~'],
+              ['~', '~', '~', '~', '~'],
+              ['3', '~', '4', '~', '5']]
+    board2 = copy.deepcopy(board1)
+    return board1, board2
 
 
 def hide_ship_names(board):
@@ -28,15 +28,6 @@ def hide_ship_names(board):
             if row[index].isnumeric():
                 row[index] = '\033[1mX\033[0m'
     return board
-
-
-def print_board_with_hidden_ships(board):
-    board_to_show = copy.deepcopy(board)
-    for row in board_to_show:
-        for index in range(len(row)):
-            if row[index].isnumeric():
-                row[index] = '\033[36m~\033[0m'
-    print_board(board_to_show)
 
 
 def print_board(board):
@@ -209,9 +200,9 @@ def place_big_ship(board, row_index, col_index, direction, ship_name):
 def is_missed(board, row_index, col_index):
     if board[row_index][col_index].isnumeric():
         return False
-    elif board[row_index][col_index] == '\033[31m\033[1mH\033[0m':
+    elif 'H' in board[row_index][col_index]:
         print_board_with_hidden_ships(board)
-        print('\033[1m\033[91mYou can\'t make more holes in there!\033[0m')
+        print('\033[1m\033[91mYou can\'t make any more holes in there!\033[0m')
         time.sleep(.8)
         return False
     else:
@@ -225,12 +216,38 @@ def print_missed_message(board, row_index, col_index):
         time.sleep(.8)
 
 
-def is_hit(board, row_index, col_index):
+def is_hit(board, row_index, col_index, hit_ship_name):
     if board[row_index][col_index].isnumeric():
-        board[row_index][col_index] = "\033[31m\033[1mH\033[0m"
+        board[row_index][col_index] = f"\033[31m\033[1mH{hit_ship_name}\033[0m"
         return True
     else:
         return False
+
+
+def print_board_with_hidden_ships(board):
+    board_to_show = copy.deepcopy(board)
+    for row in board_to_show:
+        for index in range(len(row)):
+            # check = row[index]
+            # check_char = row[index][15:16]
+            if row[index].isnumeric():
+                row[index] = '\033[36m~\033[0m'
+            if 'H' in row[index]:
+                row[index] = '\033[31m\033[1mH\033[0m'
+    print_board(board_to_show)
+
+
+def is_sunk(board, hit_ship_name):
+    for row in board:
+        if hit_ship_name in row:
+            return False
+    for row in board:
+        for cell_index in range(len(row)):
+            if row[cell_index] == f'\033[31m\033[1mH{hit_ship_name}\033[0m':
+                row[cell_index] = '\033[35mS\033[0m'
+    print_sunk_message()
+    time.sleep(.8)
+    return True
 
 
 def print_hit_message(board, row_index, col_index):
@@ -241,19 +258,6 @@ def print_hit_message(board, row_index, col_index):
 
 def print_sunk_message():
     print('\033[1m\033[95mThey\'re sinking!\033[0m')
-
-
-def is_sunk(board, hit_ship_name):
-    for row in board:
-        if hit_ship_name in row:
-            return False
-    for row in board:
-        for cell_index in range(len(row)):
-            if row[cell_index] == '\033[31m\033[1mH\033[0m':
-                row[cell_index] = '\033[35mS\033[0m'
-    print_sunk_message()
-    time.sleep(.8)
-    return True
 
 
 def enemy_has_ships(player, board1, board2):
@@ -349,18 +353,21 @@ def battleship_game():
                 col_index = move_coordinates[1]
                 if coordinates_in_board_for_fire(board, row_index, col_index, player):
                     correct_firing_solution = True
-                    hit_ship_name = board[row_index][col_index]
+                    if board[row_index][col_index].isnumeric():
+                        hit_ship_name = board[row_index][col_index]
+                    else:
+                        hit_ship_name = ''
                     if is_missed(board, row_index, col_index):
                         print_board_with_hidden_ships(board)
                         print(f'Player {toggle_player(player)}: Fire!\n')
                         print_missed_message(board, row_index, col_index)
                         time.sleep(.5)
-                    if is_hit(board, row_index, col_index):
+                    if is_hit(board, row_index, col_index, hit_ship_name):
                         print_board_with_hidden_ships(board)
                         print(f'Player {toggle_player(player)}: Fire!\n')
                         print_hit_message(board, row_index, col_index)
                         time.sleep(.5)
-                    is_sunk(board, hit_ship_name)
+                        is_sunk(board, hit_ship_name)
                     print_board_with_hidden_ships(board)
                     time.sleep(.8)
     print(f'Player {toggle_player(player)}, you\'ve sunk all the enemy ships! Good job, Admiral!')
