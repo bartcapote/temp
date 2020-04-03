@@ -274,7 +274,7 @@ def enemy_has_ships(player, board1, board2):
 
 
 def battleship_game():
-    # exec(open("test.py").read())
+    exec(open("test.py").read())
     board_height = 5
     board1 = init_boards(board_height)[0]
     board2 = init_boards(board_height)[1]
