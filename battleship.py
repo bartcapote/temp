@@ -332,7 +332,7 @@ def battleship_game():
         time.sleep(0.5)
         os.system('clear')
         if player == 1:
-            input('Press enter to start positioning phase...')
+            input('Player 2! Press enter to start positioning phase...')
         else:
             input('Press enter to start firing!')
         player = toggle_player(player)
