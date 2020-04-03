@@ -3,22 +3,22 @@ import time
 import os
 
 
-# def init_boards(height):
-#     board1 = []
-#     for i in range(height):
-#         board1.append(['\033[36m~\033[0m'] * height)
-#     board2 = copy.deepcopy(board1)
-#     return board1, board2
-
-
-def init_boards(height):                       #  FIXED BOARD FOR TESTING PURPOSE
-    board1 = [['1', '1', '~', '2', '2'],
-              ['~', '~', '~', '~', '~'],
-              ['~', '~', '~', '~', '~'],
-              ['~', '~', '~', '~', '~'],
-              ['3', '~', '4', '~', '5']]
+def init_boards(height):
+    board1 = []
+    for i in range(height):
+        board1.append(['\033[36m~\033[0m'] * height)
     board2 = copy.deepcopy(board1)
     return board1, board2
+
+
+# def init_boards(height):                       #  FIXED BOARD FOR TESTING PURPOSE
+#     board1 = [['1', '1', '~', '2', '2'],
+#               ['~', '~', '~', '~', '~'],
+#               ['~', '~', '~', '~', '~'],
+#               ['~', '~', '~', '~', '~'],
+#               ['3', '~', '4', '~', '5']]
+#     board2 = copy.deepcopy(board1)
+#     return board1, board2
 
 
 def hide_ship_names(board):
